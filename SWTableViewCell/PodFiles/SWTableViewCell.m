@@ -121,8 +121,10 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
     self.longPressGestureRecognizer.cancelsTouchesInView = NO;
     self.longPressGestureRecognizer.minimumPressDuration = kLongPressMinimumDuration;
     self.longPressGestureRecognizer.delegate = self;
-    [self.cellScrollView addGestureRecognizer:self.longPressGestureRecognizer];
-
+    //[self.cellScrollView addGestureRecognizer:self.longPressGestureRecognizer];
+    layoutUpdating = YES;
+    [super layoutSubviews];
+    layoutUpdating = NO;
     // Create the left and right utility button views, as well as vanilla UIViews in which to embed them.  We can manipulate the latter in order to effect clipping according to scroll position.
     // Such an approach is necessary in order for the utility views to sit on top to get taps, as well as allow the backgroundColor (and private UITableViewCellBackgroundView) to work properly.
 
@@ -176,6 +178,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
                                [NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.contentView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:-kUtilityButtonWidthDefault],
                                ]];
     }
+    [self.leftUtilityButtonsView setAccessibilityLabel:@"Left Utility Button"];
 }
 
 static NSString * const kTableViewPanState = @"state";
