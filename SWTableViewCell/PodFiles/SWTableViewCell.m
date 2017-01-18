@@ -122,9 +122,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
     self.longPressGestureRecognizer.minimumPressDuration = kLongPressMinimumDuration;
     self.longPressGestureRecognizer.delegate = self;
     //[self.cellScrollView addGestureRecognizer:self.longPressGestureRecognizer];
-    layoutUpdating = YES;
-    [super layoutSubviews];
-    layoutUpdating = NO;
+    
     // Create the left and right utility button views, as well as vanilla UIViews in which to embed them.  We can manipulate the latter in order to effect clipping according to scroll position.
     // Such an approach is necessary in order for the utility views to sit on top to get taps, as well as allow the backgroundColor (and private UITableViewCellBackgroundView) to work properly.
 
@@ -304,8 +302,9 @@ static NSString * const kTableViewPanState = @"state";
 
 - (void)layoutSubviews
 {
+    layoutUpdating = YES;
     [super layoutSubviews];
-    
+    layoutUpdating = NO;
     // Offset the contentView origin so that it appears correctly w/rt the enclosing scroll view (to which we moved it).
     CGRect frame = self.contentView.frame;
     frame.origin.x = [self leftUtilityButtonsWidth];
