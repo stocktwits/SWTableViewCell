@@ -179,6 +179,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
                                ]];
     }
     [self.leftUtilityButtonsView setAccessibilityLabel:@"Left Utility Button"];
+    [self.rightUtilityButtonsView setAccessibilityLabel:@"Right Utility Button"];
 }
 
 static NSString * const kTableViewPanState = @"state";
